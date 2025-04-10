@@ -1,5 +1,5 @@
 {
-  "name": "subtitle-parser-mcp",
+  "name": "youtube-transcript-download",
   "version": "1.0.0",
   "description": "MCP Plugin for Subtitle Parsing",
   "main": "src/index.ts",
