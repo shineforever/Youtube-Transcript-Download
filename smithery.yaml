@@ -1,31 +1,14 @@
-version: "1.0"
-
-services:
-  api-service:
-    name: mcp-subtitle-api  # 服务名称
-    description: 提供字幕获取和处理的 API  # 服务描述
-    type: container  # 类型为容器
-    image: your-docker-image-name:latest  # 这里填写你的 Docker 镜像名称
-    build:
-      dockerfile: Dockerfile  # 指定 Dockerfile 文件进行构建
-    environment:
-      - NODE_ENV=production  # 设置环境变量
-    ports:
-      - "3000:3000"  # 映射容器的 3000 端口到宿主机的 3000 端口
-    health_check:
-      url: "/api/parse-subtitle?url=http://example.com"  # 健康检查的 URL
-      interval: 30s  # 健康检查间隔时间
-      timeout: 10s  # 健康检查超时时间
-      retries: 3  # 健康检查重试次数
-    deployment:
-      replicas: 1  # 部署副本数量
-      resources:
-        limits:
-          memory: "512Mi"  # 限制内存为 512MB
-          cpu: "500m"  # 限制 CPU 使用为 0.5 核
-        requests:
-          memory: "256Mi"  # 请求的最小内存为 256MB
-          cpu: "250m"  # 请求的最小 CPU 使用为 0.25 核
-    secrets:
-      # 如果需要，可以在这里指定密钥或环境变量
-      - API_KEY  # 示例：API 密钥
+startCommand:
+  type: stdio
+  configSchema: {}
+  commandFunction: |-
+    (config) => ({
+      "command": "node",
+      "args": [
+        "dist/index.js"  # 假设编译后的 JavaScript 文件路径
+      ],
+      "env": {
+        "NODE_ENV": "production",
+        # 其他环境变量可以在这里定义
+      }
+    })
